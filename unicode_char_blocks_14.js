@@ -2,36 +2,36 @@ class Unicode14Block
 {
   // 拡張性を保つためにprivate変数を使います。
   // Use private for extensibility.
-  #startCodePoint;
-  #endCodePoint;
+  #firstCodePoint;
+  #lastCodePoint;
   #name;
-  constructor(startCodePoint, endCodePoint, name)
+  constructor(firstCodePoint, lastCodePoint, name)
   {
-    if (!Number.isInteger(startCodePoint)) throw new TypeError("startCodePoint is not integer.");
-    if (!Number.isInteger(endCodePoint)) throw new TypeError("endCodePoint is not integer.");
-    this.#startCodePoint = startCodePoint;
-    this.#endCodePoint = endCodePoint;
+    if (!Number.isInteger(firstCodePoint)) throw new TypeError("firstCodePoint is not integer.");
+    if (!Number.isInteger(lastCodePoint)) throw new TypeError("lastCodePoint is not integer.");
+    this.#firstCodePoint = firstCodePoint;
+    this.#lastCodePoint = lastCodePoint;
     this.#name = name.toString();
   }
-  get startCodePoint() { return this.#startCodePoint; }
-  get endCodePoint() { return this.#endCodePoint; }
+  get firstCodePoint() { return this.#firstCodePoint; }
+  get lastCodePoint() { return this.#lastCodePoint; }
   get name() { return this.#name; }
-  get size() { return this.#endCodePoint - this.#startCodePoint + 1; }
-  get range() { return [this.#startCodePoint, this.#endCodePoint]; }
+  get size() { return this.#lastCodePoint - this.#firstCodePoint + 1; }
+  get range() { return [this.#firstCodePoint, this.#lastCodePoint]; }
   containsCodePoint(codePoint)
   {
     if (!Number.isInteger(codePoint)) throw new TypeError("codePoint is not integer.");
-    return this.#startCodePoint <= codePoint && codePoint <= this.#endCodePoint;
+    return this.#firstCodePoint <= codePoint && codePoint <= this.#lastCodePoint;
   }
   *enumerateCodePoints()
   {
-    for (let codePoint = this.#startCodePoint; codePoint <= this.#endCodePoint; codePoint++) {
+    for (let codePoint = this.#firstCodePoint; codePoint <= this.#lastCodePoint; codePoint++) {
       yield codePoint;
     }
   }
   *enumerateChars()
   {
-    for (let codePoint = this.#startCodePoint; codePoint <= this.#endCodePoint; codePoint++) {
+    for (let codePoint = this.#firstCodePoint; codePoint <= this.#lastCodePoint; codePoint++) {
       yield String.fromCodePoint(codePoint);
     }
   }
