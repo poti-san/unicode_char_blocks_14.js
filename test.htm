@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Script Test Document</title>
+<script src="unicode_char_blocks_14.js"></script>
+<script>
+const unicodeBlocks = new Unicode14Blocks();
+
+console.log(unicodeBlocks.getBlockNames());
+// [ "Basic Latin", "Latin-1 Supplement", "Latin Extended-A",
+//   "Latin Extended-B", "IPA Extensions", "Spacing Modifier Letters", ...]
+
+const block = unicodeBlocks.findBlockByCodePoint("🍊".codePointAt(0));
+console.log(block.name);
+// Miscellaneous Symbols and Pictographs
+console.log(String.fromCodePoint(block.firstCodePoint));
+// 🌀
+console.log(String.fromCodePoint(block.lastCodePoint));
+// 🗿
+console.log(Array.from(block.enumerateChars()))
+// [ "🌀", "🌁", "🌂", "🌃", "🌄", "🌅", "🌆", "🌇", "🌈", "🌉", … ]
+</script>
+</head>
+</html>
